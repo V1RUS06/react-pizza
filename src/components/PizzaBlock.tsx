@@ -1,8 +1,8 @@
-import React, {FC} from "react";
+import React, { FC } from "react";
 
 interface Props {
-  title: string
-  price: string | number
+  title: string;
+  price: string | number;
 }
 
 const PizzaBlock: FC<Props> = ({ title, price }) => {
@@ -27,7 +27,7 @@ const PizzaBlock: FC<Props> = ({ title, price }) => {
       </div>
       <div className="pizza-block__bottom">
         <div className="pizza-block__price">от {price} ₽</div>
-        <div className="button button--outline button--add">
+        <button className="button button--outline button--add">
           <svg
             width="12"
             height="12"
@@ -42,7 +42,7 @@ const PizzaBlock: FC<Props> = ({ title, price }) => {
           </svg>
           <span>Добавить</span>
           <i>2</i>
-        </div>
+        </button>
       </div>
     </div>
   );
