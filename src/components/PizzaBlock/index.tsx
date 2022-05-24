@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import { PizzaBlockTypes } from "../types";
+import { PizzaBlockTypes } from "../../types";
 
 const PizzaBlock: FC<PizzaBlockTypes> = ({
   title,
