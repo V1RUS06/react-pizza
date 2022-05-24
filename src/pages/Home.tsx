@@ -19,6 +19,7 @@ export const Home = () => {
       setIsLoading(false);
     };
     fetchPizzas();
+    window.scrollTo(0, 0);
   }, []);
 
   return (

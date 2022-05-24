@@ -59,6 +59,7 @@ body {
       .categories {
         width: 100%;
         overflow: scroll;
+        overflow-y: hidden;
 
         ul {
           width: 785px;
@@ -128,6 +129,9 @@ body {
         stroke-width: 1.9;
       }
     }
+  }
+  .content__items {
+    display: block;
   }
 
   &__clear {
