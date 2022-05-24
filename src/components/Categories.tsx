@@ -22,7 +22,7 @@ export const Categories = () => {
           <li
             onClick={() => onCategoriesClick(index)}
             className={activeIndex === index ? "active" : ""}
-            key={Math.random() * 1000}
+            key={index}
           >
             {value}
           </li>

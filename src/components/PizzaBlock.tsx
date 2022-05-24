@@ -21,7 +21,7 @@ const PizzaBlock: FC<PizzaBlockTypes> = ({
           {types.map((typeId) => (
             <li
               className={activeType === typeId ? "active" : ""}
-              key={Math.random() * 1000}
+              key={typeId}
               onClick={() => setActiveType(typeId)}
             >
               {typeNames[typeId]}
@@ -32,7 +32,7 @@ const PizzaBlock: FC<PizzaBlockTypes> = ({
           {sizes.map((size, i) => (
             <li
               className={activeSize === i ? "active" : ""}
-              key={Math.random() * 1000}
+              key={size}
               onClick={() => setActiveSize(i)}
             >
               {size} см.
