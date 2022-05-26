@@ -8,3 +8,8 @@ export interface PizzaBlockTypes {
   category: number;
   rating: number;
 }
+
+export interface SortTypes {
+  name: string;
+  sortProperty: string;
+}
