@@ -5,6 +5,7 @@ import { Skeleton } from "../components/PizzaBlock/Skeleton";
 import { PizzaBlockTypes, SortTypes } from "../types";
 import PizzaBlock from "../components/PizzaBlock";
 import axios from "axios";
+import { Pagination } from "../components/Pagination";
 
 interface Props {
   searchValue: string;
@@ -13,7 +14,7 @@ interface Props {
 export const Home: FC<Props> = ({ searchValue }) => {
   const [pizzas, setPizzas] = useState<PizzaBlockTypes[] | []>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const [categoryId, setCategoryId] = useState<number>(0);
   const [sortType, setSortType] = useState<SortTypes>({
     name: "Популярности",
@@ -30,14 +31,14 @@ export const Home: FC<Props> = ({ searchValue }) => {
 
     const fetchPizzas = async () => {
       const res = await axios.get(
-        `https://628d0524a3fd714fd03db9b7.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}${search}`
+        `https://628d0524a3fd714fd03db9b7.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
       );
       setPizzas(res.data);
       setIsLoading(false);
     };
     fetchPizzas();
     window.scrollTo(0, 0);
-  }, [categoryId, sortType, searchValue]);
+  }, [categoryId, sortType, searchValue, currentPage]);
 
   const pizzasList = pizzas.map((obj: PizzaBlockTypes) => (
     <PizzaBlock {...obj} key={obj.id} />
@@ -55,6 +56,7 @@ export const Home: FC<Props> = ({ searchValue }) => {
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">{isLoading ? skeletons : pizzasList}</div>
+      <Pagination onChangePage={(number: number) => setCurrentPage(number)} />
     </div>
   );
 };
