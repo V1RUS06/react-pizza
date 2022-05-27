@@ -2,12 +2,7 @@ import React, { FC } from "react";
 import { Link } from "react-router-dom";
 import { Search } from "./Search";
 
-interface Props {
-  setSearchValue: (value: string) => void;
-  searchValue: string;
-}
-
-export const Header: FC<Props> = ({ searchValue, setSearchValue }) => {
+export const Header: FC = () => {
   return (
     <div className="header">
       <div className="container">
@@ -19,7 +14,7 @@ export const Header: FC<Props> = ({ searchValue, setSearchValue }) => {
               <p>самая вкусная пицца во вселенной</p>
             </div>
           </Link>
-          <Search searchValue={searchValue} setSearchValue={setSearchValue} />
+          <Search />
         </div>
         <div className="header__cart">
           <Link to="/cart" className="button button--cart">

@@ -1,13 +1,11 @@
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
 // @ts-ignore
 import styles from "./Search.module.scss";
+import { SearchContext } from "../../App";
 
-interface Props {
-  setSearchValue: (value: string) => void;
-  searchValue: string;
-}
+export const Search: FC = () => {
+  const { searchValue, setSearchValue } = useContext(SearchContext);
 
-export const Search: FC<Props> = ({ searchValue, setSearchValue }) => {
   return (
     <div className={styles.root}>
       <svg
@@ -48,11 +46,13 @@ export const Search: FC<Props> = ({ searchValue, setSearchValue }) => {
         className={styles.input}
         placeholder="Поиск пиццы"
         value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
+        onChange={(e) =>
+          setSearchValue ? setSearchValue(e.target.value) : null
+        }
       />
       {searchValue && (
         <svg
-          onClick={() => setSearchValue("")}
+          onClick={() => (setSearchValue ? setSearchValue("") : null)}
           className={styles.clearIcon}
           height="48"
           viewBox="0 0 48 48"

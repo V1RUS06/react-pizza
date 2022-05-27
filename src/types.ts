@@ -13,3 +13,8 @@ export interface SortTypes {
   name: string;
   sortProperty: string;
 }
+
+export interface SearchContextTypes {
+  searchValue?: string;
+  setSearchValue?: (value: string) => void;
+}

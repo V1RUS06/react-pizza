@@ -1,17 +1,14 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useContext, useEffect, useState } from "react";
 import { Categories } from "../components/Categories";
 import { Sort } from "../components/Sort";
 import { Skeleton } from "../components/PizzaBlock/Skeleton";
-import { PizzaBlockTypes, SortTypes } from "../types";
+import { PizzaBlockTypes, SearchContextTypes, SortTypes } from "../types";
 import PizzaBlock from "../components/PizzaBlock";
 import axios from "axios";
 import { Pagination } from "../components/Pagination";
+import { SearchContext } from "../App";
 
-interface Props {
-  searchValue: string;
-}
-
-export const Home: FC<Props> = ({ searchValue }) => {
+export const Home: FC = () => {
   const [pizzas, setPizzas] = useState<PizzaBlockTypes[] | []>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -20,6 +17,7 @@ export const Home: FC<Props> = ({ searchValue }) => {
     name: "Популярности",
     sortProperty: "rating",
   });
+  const { searchValue } = useContext<SearchContextTypes>(SearchContext);
 
   useEffect(() => {
     setIsLoading(true);
