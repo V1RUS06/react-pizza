@@ -2,22 +2,21 @@ import React, { FC, useContext, useEffect, useState } from "react";
 import { Categories } from "../components/Categories";
 import { Sort } from "../components/Sort";
 import { Skeleton } from "../components/PizzaBlock/Skeleton";
-import { PizzaBlockTypes, SearchContextTypes, SortTypes } from "../types";
+import { PizzaBlockTypes, SearchContextTypes } from "../types";
 import PizzaBlock from "../components/PizzaBlock";
 import axios from "axios";
 import { Pagination } from "../components/Pagination";
 import { SearchContext } from "../App";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../redux/store";
 import { setCategoryId } from "../redux/slices/filterSlice";
+import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 
 export const Home: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [pizzas, setPizzas] = useState<PizzaBlockTypes[] | []>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const { searchValue } = useContext<SearchContextTypes>(SearchContext);
-  const { categoryId, sort } = useSelector((state: RootState) => state.filter);
+  const { categoryId, sort} = useAppSelector((state) => state.filter);
 
   const onChangeCategory = (id: number) => {
     dispatch(setCategoryId(id));

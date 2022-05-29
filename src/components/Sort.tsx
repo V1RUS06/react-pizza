@@ -1,14 +1,13 @@
 import React, { FC, useState } from "react";
 import { SortTypes } from "../types";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../redux/store";
 import { setSort } from "../redux/slices/filterSlice";
+import {useAppDispatch, useAppSelector} from "../hooks/hooks";
 
 interface Props {}
 
 export const Sort: FC<Props> = () => {
-  const dispatch = useDispatch();
-  const sort = useSelector((state: RootState) => state.filter.sort);
+  const dispatch = useAppDispatch();
+  const sort = useAppSelector((state) => state.filter.sort);
 
   const [open, setOpen] = useState<boolean>(false);
 

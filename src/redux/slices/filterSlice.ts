@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { SortTypes } from "../../types";
 
 export interface filterSlice {
@@ -21,7 +21,7 @@ export const filterSlice = createSlice({
     setCategoryId(state, action) {
       state.categoryId = action.payload;
     },
-    setSort(state, action) {
+    setSort(state, action: PayloadAction<SortTypes>) {
       state.sort = action.payload;
     },
   },
