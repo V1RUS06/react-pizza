@@ -1,12 +1,15 @@
 import React, { FC, useState } from "react";
 import { SortTypes } from "../types";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../redux/store";
+import { setSort } from "../redux/slices/filterSlice";
 
-interface Props {
-  onChangeCategory: (obj: SortTypes) => void;
-  value: SortTypes;
-}
+interface Props {}
 
-export const Sort: FC<Props> = ({ onChangeCategory, value }) => {
+export const Sort: FC<Props> = () => {
+  const dispatch = useDispatch();
+  const sort = useSelector((state: RootState) => state.filter.sort);
+
   const [open, setOpen] = useState<boolean>(false);
 
   const list = [
@@ -19,7 +22,7 @@ export const Sort: FC<Props> = ({ onChangeCategory, value }) => {
   ];
 
   const onClickListItem = (obj: SortTypes) => {
-    onChangeCategory(obj);
+    dispatch(setSort(obj));
     setOpen(false);
   };
 
@@ -39,7 +42,7 @@ export const Sort: FC<Props> = ({ onChangeCategory, value }) => {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => setOpen(!open)}>{value.name}</span>
+        <span onClick={() => setOpen(!open)}>{sort.name}</span>
       </div>
       {open && (
         <div className="sort__popup">
@@ -49,7 +52,7 @@ export const Sort: FC<Props> = ({ onChangeCategory, value }) => {
                 key={i}
                 onClick={() => onClickListItem(item)}
                 className={
-                  value.sortProperty === item.sortProperty ? "active" : ""
+                  sort.sortProperty === item.sortProperty ? "active" : ""
                 }
               >
                 {item.name}
