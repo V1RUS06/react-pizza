@@ -7,19 +7,23 @@ import PizzaBlock from "../components/PizzaBlock";
 import axios from "axios";
 import { Pagination } from "../components/Pagination";
 import { SearchContext } from "../App";
-import { setCategoryId } from "../redux/slices/filterSlice";
+import { setCategoryId, setCurrentPage } from "../redux/slices/filterSlice";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 
 export const Home: FC = () => {
   const dispatch = useAppDispatch();
   const [pizzas, setPizzas] = useState<PizzaBlockTypes[] | []>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [currentPage, setCurrentPage] = useState<number>(1);
   const { searchValue } = useContext<SearchContextTypes>(SearchContext);
-  const { categoryId, sort} = useAppSelector((state) => state.filter);
+  const { categoryId, sort, currentPage } = useAppSelector(
+    (state) => state.filter
+  );
 
   const onChangeCategory = (id: number) => {
     dispatch(setCategoryId(id));
+  };
+  const onChangePage = (number: number) => {
+    dispatch(setCurrentPage(number));
   };
 
   useEffect(() => {
@@ -57,7 +61,7 @@ export const Home: FC = () => {
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">{isLoading ? skeletons : pizzasList}</div>
-      <Pagination onChangePage={(number: number) => setCurrentPage(number)} />
+      <Pagination onChangePage={onChangePage} currentPage={currentPage} />
     </div>
   );
 };
