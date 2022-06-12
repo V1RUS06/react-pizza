@@ -26,6 +26,8 @@ export const Sort: FC = () => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
+      // TODO: исправить ошибку ts с path
+      // @ts-ignore
       if (!event.path.includes(sortRef.current)) {
         setOpen(false);
       }
