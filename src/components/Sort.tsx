@@ -1,24 +1,22 @@
 import React, { FC, useState } from "react";
 import { SortTypes } from "../types";
 import { setSort } from "../redux/slices/filterSlice";
-import {useAppDispatch, useAppSelector} from "../hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 
-interface Props {}
+export const list = [
+  { name: "Популярности (DESC)", sortProperty: "rating" },
+  { name: "Популярности (ASC)", sortProperty: "-rating" },
+  { name: "Цене (DESC)", sortProperty: "price" },
+  { name: "Цене (ASC)", sortProperty: "-price" },
+  { name: "Алфавиту (DESC)", sortProperty: "title" },
+  { name: "Алфавиту (ASC)", sortProperty: "-title" },
+];
 
-export const Sort: FC<Props> = () => {
+export const Sort: FC = () => {
   const dispatch = useAppDispatch();
   const sort = useAppSelector((state) => state.filter.sort);
 
   const [open, setOpen] = useState<boolean>(false);
-
-  const list = [
-    { name: "Популярности (DESC)", sortProperty: "rating" },
-    { name: "Популярности (ASC)", sortProperty: "-rating" },
-    { name: "Цене (DESC)", sortProperty: "price" },
-    { name: "Цене (ASC)", sortProperty: "-price" },
-    { name: "Алфавиту (DESC)", sortProperty: "title" },
-    { name: "Алфавиту (ASC)", sortProperty: "-title" },
-  ];
 
   const onClickListItem = (obj: SortTypes) => {
     dispatch(setSort(obj));
