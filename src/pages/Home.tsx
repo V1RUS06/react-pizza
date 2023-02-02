@@ -1,20 +1,20 @@
-import React, { FC, useContext, useEffect, useRef, useState } from "react";
-import { Categories } from "../components/Categories";
-import { list, Sort } from "../components/Sort";
-import { Skeleton } from "../components/PizzaBlock/Skeleton";
-import { PizzaBlockTypes, SearchContextTypes } from "../types";
-import PizzaBlock from "../components/PizzaBlock";
-import axios from "axios";
-import { Pagination } from "../components/Pagination";
-import { SearchContext } from "../App";
+import React, {FC, useContext, useEffect, useRef, useState} from 'react';
+import {Categories} from '../components/Categories';
+import {list, Sort} from '../components/Sort';
+import {Skeleton} from '../components/PizzaBlock/Skeleton';
+import {PizzaBlockTypes, SearchContextTypes} from '../types';
+import {PizzaBlock} from '../components/PizzaBlock/PizzaBlock';
+import axios from 'axios';
+import {Pagination} from '../components/Pagination/Pagination';
+import {SearchContext} from '../App';
 import {
   setCategoryId,
   setCurrentPage,
   setFilters,
-} from "../redux/slices/filterSlice";
-import { useAppDispatch, useAppSelector } from "../hooks/hooks";
-import qs from "qs";
-import { useNavigate } from "react-router-dom";
+} from '../redux/slices/filterSlice';
+import {useAppDispatch, useAppSelector} from '../hooks/hooks';
+import qs from 'qs';
+import {useNavigate} from 'react-router-dom';
 
 export const Home: FC = () => {
   const navigate = useNavigate();
@@ -23,10 +23,8 @@ export const Home: FC = () => {
   const isMounted = useRef<boolean>(false);
   const [pizzas, setPizzas] = useState<PizzaBlockTypes[] | []>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const { searchValue } = useContext<SearchContextTypes>(SearchContext);
-  const { categoryId, sort, currentPage } = useAppSelector(
-    (state) => state.filter
-  );
+  const {searchValue} = useContext<SearchContextTypes>(SearchContext);
+  const {categoryId, sort, currentPage} = useAppSelector(state => state.filter);
 
   const onChangeCategory = (id: number) => {
     dispatch(setCategoryId(id));
@@ -38,13 +36,13 @@ export const Home: FC = () => {
   const fetchPizzas = async () => {
     setIsLoading(true);
 
-    const sortBy = sort.sortProperty.replace("-", "");
-    const order = sort.sortProperty.includes("-") ? "asc" : "desc";
-    const category = categoryId > 0 ? `category=${categoryId}` : "";
-    const search = searchValue ? `&search=${searchValue}` : "";
+    const sortBy = sort.sortProperty.replace('-', '');
+    const order = sort.sortProperty.includes('-') ? 'asc' : 'desc';
+    const category = categoryId > 0 ? `category=${categoryId}` : '';
+    const search = searchValue ? `&search=${searchValue}` : '';
 
     const res = await axios.get(
-      `https://628d0524a3fd714fd03db9b7.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
+      `https://628d0524a3fd714fd03db9b7.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`,
     );
     setPizzas(res.data);
     setIsLoading(false);
@@ -68,13 +66,13 @@ export const Home: FC = () => {
   useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
-      const sort = list.find((obj) => obj.sortProperty === params.sortProperty);
+      const sort = list.find(obj => obj.sortProperty === params.sortProperty);
 
       dispatch(
         setFilters({
           ...params,
           sort,
-        })
+        }),
       );
       isSearch.current = true;
     }
@@ -100,7 +98,7 @@ export const Home: FC = () => {
     <div className="container">
       <div className="content__top">
         <Categories
-          onCategoriesClick={(i) => onChangeCategory(i)}
+          onCategoriesClick={i => onChangeCategory(i)}
           value={categoryId}
         />
         <Sort />

@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { SortTypes } from "../../types";
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {SortTypes} from '../../types';
 
 export interface filterSlice {
   categoryId: number;
@@ -11,13 +11,13 @@ const initialState: filterSlice = {
   categoryId: 0,
   currentPage: 1,
   sort: {
-    name: "популярности",
-    sortProperty: "rating",
+    name: 'популярности',
+    sortProperty: 'rating',
   },
 };
 
 export const filterSlice = createSlice({
-  name: "filters",
+  name: 'filters',
   initialState,
   reducers: {
     setCategoryId(state, action: PayloadAction<number>) {
@@ -37,7 +37,7 @@ export const filterSlice = createSlice({
   },
 });
 
-export const { setCategoryId, setSort, setCurrentPage, setFilters } =
+export const {setCategoryId, setSort, setCurrentPage, setFilters} =
   filterSlice.actions;
 
 export default filterSlice.reducer;

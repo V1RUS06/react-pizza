@@ -1,19 +1,19 @@
-import React, { createContext, useState } from "react";
-import "./scss/app.scss";
-import { Header } from "./components/Header";
-import { Home } from "./pages/Home";
-import { Route, Routes } from "react-router-dom";
-import { NotFound } from "./pages/NotFound";
-import { Cart } from "./pages/Cart";
-import { SearchContextTypes } from "./types";
+import React, {createContext, useState} from 'react';
+import './scss/app.scss';
+import {Header} from './components/Header';
+import {Home} from './pages/Home';
+import {Route, Routes} from 'react-router-dom';
+import {NotFound} from './pages/NotFound';
+import {Cart} from './pages/Cart';
+import {SearchContextTypes} from './types';
 
 export const SearchContext = createContext<SearchContextTypes>({});
 
 function App() {
-  const [searchValue, setSearchValue] = useState<string>("");
+  const [searchValue, setSearchValue] = useState<string>('');
 
   return (
-    <SearchContext.Provider value={{ searchValue, setSearchValue }}>
+    <SearchContext.Provider value={{searchValue, setSearchValue}}>
       <div className="wrapper">
         <Header />
         <div className="content">

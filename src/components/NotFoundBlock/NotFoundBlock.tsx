@@ -1,6 +1,5 @@
-import React from "react";
-// @ts-ignore
-import styles from "./NotFoundBlock.module.scss";
+import React from 'react';
+import styles from './NotFoundBlock.module.scss';
 
 export const NotFoundBlock = () => {
   return (

@@ -5,31 +5,30 @@ import React, {
   useContext,
   useRef,
   useState,
-} from "react";
-// @ts-ignore
-import styles from "./Search.module.scss";
-import { SearchContext } from "../../App";
-import debounce from "lodash.debounce";
+} from 'react';
+import styles from './Search.module.scss';
+import {SearchContext} from '../../App';
+import debounce from 'lodash.debounce';
 
 export const Search: FC = () => {
-  const [value, setValue] = useState<string>("");
-  const { setSearchValue } = useContext(SearchContext);
+  const [value, setValue] = useState<string>('');
+  const {setSearchValue} = useContext(SearchContext);
 
   const onClickClear = () => {
     if (setSearchValue) {
-      setSearchValue("");
-      setValue("");
+      setSearchValue('');
+      setValue('');
       inputRef.current?.focus();
     }
   };
 
   const updateSearchValue = useCallback(
-    debounce((str) => {
+    debounce(str => {
       if (setSearchValue) {
         setSearchValue(str);
       }
     }, 250),
-    []
+    [],
   );
 
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -47,8 +46,7 @@ export const Search: FC = () => {
         id="Editable-line"
         version="1.1"
         viewBox="0 0 32 32"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+        xmlns="http://www.w3.org/2000/svg">
         <circle
           cx="14"
           cy="14"
@@ -89,8 +87,7 @@ export const Search: FC = () => {
           height="48"
           viewBox="0 0 48 48"
           width="48"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+          xmlns="http://www.w3.org/2000/svg">
           <path d="M38 12.83L35.17 10 24 21.17 12.83 10 10 12.83 21.17 24 10 35.17 12.83 38 24 26.83 35.17 38 38 35.17 26.83 24z" />
           <path d="M0 0h48v48H0z" fill="none" />
         </svg>
